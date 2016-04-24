@@ -1,11 +1,13 @@
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from lights.models import Light
+import json
 
 def index(request):
-	lightList = ''
-	for light in Light.objects.all(): 
-		lightList+=(str(light.id) + ' | ' + light.description + '<br>')
-	return HttpResponse(lightList)
+	#lightList = ''
+	#for light in Light.objects.all(): 
+	#	lightList+=(str(light.id) + ' | ' + light.description + '<br>')
+	lightsDict = dict(lights=list(Light.objects.values('id', 'description')))
+	return JsonResponse(lightsDict)
 
 def detail(request, light_id):
 	try:
