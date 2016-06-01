@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 import os
 
-class Light(models.Model):
+class Fan(models.Model):
 	raw_code = models.CharField(max_length=250)
 	description = models.CharField(max_length=200)
 	def __str__(self):
